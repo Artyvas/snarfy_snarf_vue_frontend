@@ -1,21 +1,33 @@
 <template>
   <div class="home">
     <div>
-      <h1>New Booking</h1>
+      <h1>New Booking Form</h1>
       First Name:
       <input type="text" v-model="newBookingFirstName" />
+      <br />
       Last Name:
       <input type="text" v-model="newBookingLastName" />
+      <br />
       Animal First Name:
       <input type="text" v-model="newBookingAnimalFirst" />
+      <br />
       Animal Last Name:
       <input type="text" v-model="newBookingAnimalLast" />
+      <br />
       Animal Type:
-      <input type="text" v-model="newBookingAnimalType" />
+      <select v-model="newBookingAnimalType">
+        <option disabled value="">Please select an Animal Type</option>
+        <option>Cat</option>
+        <option>Dog</option>
+        <option>Other</option>
+      </select>
+      <br />
       Hours Requested:
       <input type="number" v-model.number="newBookingHoursRq" />
+      <br />
       Date of Service:
-      <input type="text" v-model="newBookingDateOfService" />
+      <input type="date" v-model="newBookingDateOfService" />
+      <br />
       <button v-on:click="createBooking()">Create</button>
     </div>
   </div>
@@ -66,6 +78,13 @@ export default {
         .then((response) => {
           console.log("Success", response.data);
           this.bookings.push(response.data);
+          this.newBookingFirstName = "";
+          this.newBookingLastName = "";
+          this.newBookingAnimalFirst = "";
+          this.newBookingAnimalLast = "";
+          this.newBookingAnimalType = "";
+          this.newBookingHoursRq = null;
+          this.newBookingDateOfService = "";
         })
         .catch((error) => console.log(error.response));
     },
